@@ -1,7 +1,7 @@
 const HELP: &str = "\
-pomodoro
+pomodoro-notify
 USAGE:
-  pomodoro [POMODORO_DURATION [BREAK_DURATION [POMODOROS]]]
+  pomodoro-notify [POMODORO_DURATION [BREAK_DURATION [POMODOROS]]]
 FLAGS:
   -h, --help            Prints help information
 OPTIONS:
