@@ -1,0 +1,18 @@
+[package]
+name = "pomodoro-notify"
+version = "0.1.0"
+edition = "2018"
+description = "Simple pomodoro timer that sends desktop notifications."
+repository = "https://github.com/kirinokirino/pomodoro_notify"
+documentation = ""
+homepage = ""
+readme = "README.md"
+license = "mit"
+keywords = ["pomodoro", "timer", "productivity"]
+categories = ["command-line-utilities"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+notify-rust = "4"
+pico-args = { version="0.4", default-features=false }
