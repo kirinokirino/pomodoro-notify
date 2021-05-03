@@ -31,7 +31,7 @@ fn next_pomodoro(pomodoro_duration: u32, break_duration: u32) {
 
     countdown(&mut notification, "get ready: ", countdown_duration);
     notification
-        .body(&format!("remaining time: {} minutes", pomodoro_duration))
+        .body(&format!("remaining time: {} minutes", break_duration))
         .appname("Break");
     notification.update();
 
