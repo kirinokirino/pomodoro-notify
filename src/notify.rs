@@ -18,9 +18,11 @@ fn next_pomodoro(pomodoro_duration: u32, break_duration: u32) {
         .appname("Pomodoro");
     notification.update();
 
-    std::thread::sleep(Duration::from_secs(u64::from(
-        pomodoro_duration * 60 - countdown_duration,
-    )));
+    if pomodoro_duration > 0 {
+        std::thread::sleep(Duration::from_secs(u64::from(
+            pomodoro_duration * 60 - countdown_duration,
+        )));
+    }
 
     let mut notification = Notification::new()
         .summary("Break!")
@@ -35,9 +37,11 @@ fn next_pomodoro(pomodoro_duration: u32, break_duration: u32) {
         .appname("Break");
     notification.update();
 
-    std::thread::sleep(Duration::from_secs(u64::from(
-        break_duration * 60 - countdown_duration,
-    )));
+    if break_duration > 0 {
+        std::thread::sleep(Duration::from_secs(u64::from(
+            break_duration * 60 - countdown_duration,
+        )));
+    }
 }
 
 // this is a xdg only feature
@@ -64,7 +68,8 @@ pub fn pomodoros_launch(args: AppArgs) {
         number_of_pomodoros,
     } = args;
 
-    for _ in 0..number_of_pomodoros {
+    for pomodoro in 0..number_of_pomodoros {
+        println!("Pomodoro {} of {}", pomodoro + 1, number_of_pomodoros);
         next_pomodoro(pomodoro_duration, break_duration);
     }
 }

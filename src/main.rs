@@ -17,4 +17,5 @@ fn main() {
 
     println!("Pomodoro timer started! Ctrl-C to abort sending notifications.");
     pomodoros_launch(args);
+    println!("Alloted pomodoros are over! You did great! Probably :) ");
 }
