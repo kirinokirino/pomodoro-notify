@@ -1,6 +1,10 @@
 # pomodoro-notify
 Simple pomodoro timer that sends desktop notifications.
 
+Default number of pomodoros is 4.
+
+Only tested on linux, but should be cross-platform.
+
 ```
 USAGE:
   pomodoro-notify [POMODORO_DURATION [BREAK_DURATION [POMODOROS]]]

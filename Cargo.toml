@@ -15,4 +15,5 @@ categories = ["command-line-utilities"]
 
 [dependencies]
 notify-rust = "4"
+pbr = "1.0.*"
 pico-args = { version="0.4", default-features=false }

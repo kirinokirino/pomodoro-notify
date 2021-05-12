@@ -1,14 +1,15 @@
 use crate::cmd::AppArgs;
 use notify_rust::{Notification, NotificationHandle};
-#[cfg(all(unix, not(target_os = "macos")))]
 use std::time::Duration;
+extern crate pbr;
+use pbr::{ProgressBar};
 
 fn next_pomodoro(pomodoro_duration: u32, break_duration: u32) {
     let countdown_duration: u32 = 3;
     let mut notification = Notification::new()
         .summary("Work!")
         .icon("clock")
-        .timeout(8_000)
+        .timeout(5_000)
         .show()
         .unwrap();
 
@@ -19,15 +20,22 @@ fn next_pomodoro(pomodoro_duration: u32, break_duration: u32) {
     notification.update();
 
     if pomodoro_duration > 0 {
-        std::thread::sleep(Duration::from_secs(u64::from(
-            pomodoro_duration * 60 - countdown_duration,
-        )));
+        let count = u64::from(pomodoro_duration * 60 - countdown_duration);
+        let mut pb = ProgressBar::new(count);
+        pb.show_speed = false;
+        pb.show_counter = false;
+        pb.message("Focus... ");
+        for _ in 0..count {
+            pb.inc();
+            std::thread::sleep(Duration::from_secs(1));
+        }
+        pb.finish_print("Good job!");
     }
 
     let mut notification = Notification::new()
         .summary("Break!")
         .icon("clock")
-        .timeout(8_000)
+        .timeout(5_000)
         .show()
         .unwrap();
 
@@ -38,9 +46,15 @@ fn next_pomodoro(pomodoro_duration: u32, break_duration: u32) {
     notification.update();
 
     if break_duration > 0 {
-        std::thread::sleep(Duration::from_secs(u64::from(
-            break_duration * 60 - countdown_duration,
-        )));
+        let count = u64::from(break_duration * 60 - countdown_duration);
+        let mut pb = ProgressBar::new(count);
+        pb.show_speed = false;
+        pb.show_counter = false;
+        pb.message("Break... ");
+        for _ in 0..count {
+            pb.inc();
+            std::thread::sleep(Duration::from_secs(1));
+        }
     }
 }
 
