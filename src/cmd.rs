@@ -4,6 +4,8 @@ USAGE:
   pomodoro-notify [POMODORO_DURATION [BREAK_DURATION [POMODOROS]]]
 FLAGS:
   -h, --help            Prints help information
+  -f, --forever, 		
+  -∞, --infinity,		Runs forever
 OPTIONS:
    POMODORO_DURATION: the number of minutes for the pomodoro
    BREAK_DURATION: the number of minutes for the break
@@ -26,11 +28,17 @@ pub fn parse_args() -> Result<AppArgs, pico_args::Error> {
         std::process::exit(0);
     }
 
-    let args = AppArgs {
-        pomodoro_duration: pargs.opt_free_from_str()?.unwrap_or(25),
-        break_duration: pargs.opt_free_from_str()?.unwrap_or(5),
-        number_of_pomodoros: pargs.opt_free_from_str()?.unwrap_or(4),
-    };
+    let infinite = pargs.contains(["-f", "--forever"]) || pargs.contains(["-∞", "--infinity"]);
+
+	let mut args = AppArgs {
+	            pomodoro_duration: pargs.opt_free_from_str()?.unwrap_or(25),
+	            break_duration: pargs.opt_free_from_str()?.unwrap_or(5),
+	            number_of_pomodoros: pargs.opt_free_from_str()?.unwrap_or(4),
+	        };
+
+	if infinite {
+		args.number_of_pomodoros = 9999;
+	}
 
     // It's up to the caller what to do with the remaining arguments.
     let remaining = pargs.finish();

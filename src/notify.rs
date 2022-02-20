@@ -2,7 +2,7 @@ use crate::cmd::AppArgs;
 use notify_rust::{Notification, NotificationHandle};
 use std::time::Duration;
 extern crate pbr;
-use pbr::{ProgressBar};
+use pbr::ProgressBar;
 
 fn next_pomodoro(pomodoro_duration: u32, break_duration: u32) {
     let countdown_duration: u32 = 3;
@@ -82,8 +82,17 @@ pub fn pomodoros_launch(args: AppArgs) {
         number_of_pomodoros,
     } = args;
 
-    for pomodoro in 0..number_of_pomodoros {
-        println!("Pomodoro {} of {}", pomodoro + 1, number_of_pomodoros);
-        next_pomodoro(pomodoro_duration, break_duration);
+    if number_of_pomodoros > 9000 {
+        let mut pomodoro = 0;
+        loop {
+            pomodoro += 1;
+            println!("Pomodoro {}", pomodoro);
+            next_pomodoro(pomodoro_duration, break_duration);
+        }
+    } else {
+        for pomodoro in 0..number_of_pomodoros {
+            println!("Pomodoro {} of {}", pomodoro + 1, number_of_pomodoros);
+            next_pomodoro(pomodoro_duration, break_duration);
+        }
     }
 }
