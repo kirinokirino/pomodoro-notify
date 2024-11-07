@@ -15,7 +15,7 @@ fn next_pomodoro(pomodoro_duration: u32, break_duration: u32) {
 
     countdown(&mut notification, "get ready: ", countdown_duration);
     notification
-        .body(&format!("remaining time: {} minutes", pomodoro_duration))
+        .body(&format!("remaining time: {pomodoro_duration} minutes"))
         .appname("Pomodoro");
     notification.update();
 
@@ -41,7 +41,7 @@ fn next_pomodoro(pomodoro_duration: u32, break_duration: u32) {
 
     countdown(&mut notification, "get ready: ", countdown_duration);
     notification
-        .body(&format!("remaining time: {} minutes", break_duration))
+        .body(&format!("remaining time: {break_duration} minutes"))
         .appname("Break");
     notification.update();
 
@@ -86,7 +86,7 @@ pub fn pomodoros_launch(args: AppArgs) {
         let mut pomodoro = 0;
         loop {
             pomodoro += 1;
-            println!("Pomodoro {}", pomodoro);
+            println!("Pomodoro {pomodoro}");
             next_pomodoro(pomodoro_duration, break_duration);
         }
     } else {

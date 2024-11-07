@@ -10,12 +10,12 @@ fn main() {
     let args = match parse_args() {
         Ok(v) => v,
         Err(e) => {
-            eprintln!("Error: {}.", e);
+            eprintln!("Error: {e}.");
             std::process::exit(1);
         }
     };
 
     println!("Pomodoro timer started! Ctrl-C to abort sending notifications.");
     pomodoros_launch(args);
-    println!("Alloted pomodoros are over! You did great! Probably :) ");
+    println!("Allotted pomodoros are over! You did great! Probably :) ");
 }

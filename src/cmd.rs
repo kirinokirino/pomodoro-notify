@@ -24,7 +24,7 @@ pub fn parse_args() -> Result<AppArgs, pico_args::Error> {
 
     // Help has a higher priority and should be handled separately.
     if pargs.contains(["-h", "--help"]) {
-        print!("{}", HELP);
+        print!("{HELP}");
         std::process::exit(0);
     }
 
@@ -43,7 +43,7 @@ pub fn parse_args() -> Result<AppArgs, pico_args::Error> {
     // It's up to the caller what to do with the remaining arguments.
     let remaining = pargs.finish();
     if !remaining.is_empty() {
-        eprintln!("Warning: unused arguments left: {:?}.", remaining);
+        eprintln!("Warning: unused arguments left: {remaining:?}.");
     }
 
     Ok(args)
